@@ -22,7 +22,7 @@ module Htcp
     module OpData
       extend Autoload
       
-      autoload :Clr,        __p('message/op_data/crl')
+      autoload :Clr,        __p('message/op_data/clr')
     end
   end
 end

@@ -8,7 +8,7 @@ module Htcp
       end
     
       def to_s
-        payload = @data.to_s + @auth.to_s      
+        payload = @data.to_s + @auth.to_s
         @header.payload_len = payload.length
         @header.to_s + payload
       end

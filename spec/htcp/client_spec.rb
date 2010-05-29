@@ -36,4 +36,38 @@ describe Htcp::Client do
       @htcp.send(:parse_server, 'foo:blah').should == [ 'foo', Htcp::Client::DEFAULT_PORT ]
     end
   end
+  
+  context "in clr method" do
+    before do
+      @htcp = Htcp::Client.new('127.0.0.1')
+    end
+    
+    context "when called without additional headers" do
+      it "should compose a CLR request and try to send it out" do
+        @htcp.should_receive(:send_messages)
+        @htcp.clr('/foo/bar?baz=blah')
+      end
+    end
+    
+    context "when called with additional headers" do
+      it "should compose a CLR request and try to send it out" do
+        @htcp.should_receive(:send_messages)
+        @htcp.clr('/foo/bar?baz=blah', 'Foo: bar')
+      end
+    end
+  end
+  
+  context "in send_message method" do
+    it "should send the message out to one server when only one server specified" do
+      htcp = Htcp::Client.new('127.0.0.1')
+      htcp.should_receive(:send_message).once
+      htcp.clr('/foo/bar?baz=blah')
+    end
+
+    it "should send the message out to all servers when many servers specified" do
+      htcp = Htcp::Client.new('127.0.0.1', '127.0.0.2')
+      htcp.should_receive(:send_message).twice
+      htcp.clr('/foo/bar?baz=blah')
+    end
+  end
 end
