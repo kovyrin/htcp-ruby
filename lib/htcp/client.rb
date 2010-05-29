@@ -2,13 +2,15 @@ require 'socket'
 
 module Htcp
   class Client
+    DEFAULT_PORT = 4827
+
     def initialize(*servers_list)
       @servers = servers_list.flatten
     end
   
     def clr(url, headers = '')
       message = Htcp::Message::Constructor.new(
-        :opcode => 4, # CLR
+        :opcode => Htcp::Message::OpData::Clr::OP_CODE,
         :rd => 0,
         :trans_id => Time.now.to_i,
         :op_data => Htcp::Message::OpData::Clr.new(:uri => url, :headers => headers)
@@ -29,8 +31,10 @@ module Htcp
     end
     
     def parse_server(server)
-      return server if server.kind_of?(Array)
-      return server, 4827
+      host, port = server.split(':')
+      port = port.to_i
+      port = DEFAULT_PORT if port.zero?
+      return host, port
     end
   end
 end
