@@ -2,8 +2,8 @@ require 'socket'
 
 module Htcp
   class Client
-    def initialize(servers_list)
-      @servers = servers_list
+    def initialize(*servers_list)
+      @servers = servers_list.flatten
     end
   
     def clr(url, headers = '')

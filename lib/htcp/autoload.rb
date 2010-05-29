@@ -1,15 +1,15 @@
 module Htcp
   module Autoload
     # @private
-    def self.__p(*path) File.join(Htcp::LIB_ROOT, 'htcp', *path) end
+    def __p(*path) File.join(Htcp::LIB_ROOT, 'htcp', *path) end
   end
-  include Autoload
+  extend Autoload
   
   # Define autoloaded modules/classes
   autoload :Client,         __p('client')
   
   module Message
-    include Autoload
+    extend Autoload
 
     autoload :Base,         __p('message/base')
     autoload :Constructor,  __p('message/constructor')
@@ -20,7 +20,7 @@ module Htcp
     autoload :Specifier,    __p('message/specifier')
     
     module OpData
-      include Autoload
+      extend Autoload
       
       autoload :Clr,        __p('message/op_data/crl')
     end
