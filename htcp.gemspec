@@ -25,6 +25,7 @@ Gem::Specification.new do |s|
      "Rakefile",
      "VERSION",
      "bin/htcp-client",
+     "htcp.gemspec",
      "init.rb",
      "lib/htcp.rb",
      "lib/htcp/autoload.rb",
