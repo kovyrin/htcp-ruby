@@ -1,0 +1,55 @@
+= Ruby Implementation of the HTCP Protocol Client
+
+This simple library implements HTCP protocol (http://www.htcp.org/) and could be used in any 
+Ruby project to manage any HTCP-compliant caching server (authors use it for Squid 2.7 servers 
+management).
+
+
+== What commands are supported?
+
+At this moment the only supported HTCP command is CLR that could be used to remove a cached 
+page from any HTCP-compliant server.
+
+
+== How to install?
+
+There are two options when approaching htcp-ruby installation:
+
+* using the gem (recommended and could be used in non-Rails projects)
+* install as a Rails plugin
+
+To install as a gem in a Rails project, add this to your environment.rb:
+
+    config.gem 'htcp'
+
+And then run the command:
+
+    sudo rake gems:install
+
+To install loops as a Rails plugin you need to do the following:
+
+    ./script/plugin install git://github.com/kovyrin/htcp-ruby.git
+
+This will install the whole package in your vendor/plugins directory.
+For merb applications, just check out the code and place it to the vendor/plugins directory.
+
+
+== How to use?
+
+Here is a simple code that could be used to purge a page from a caching server:
+
+    # Instantiate HTCP client
+    # It is possible to pass an array of servers to the constructor, 
+    # in that case any request sent to the client will be sent out 
+    # to all specified servers
+    htcp = Htcp::Client.new('cache01.local')
+
+    # Send CLR request and purge a page from the cache
+    htcp.clr("http://www.yoursite.com/some/page/url")
+
+
+== Who are the authors?
+
+This plugin has been created in Scribd.com for our internal use and then the sources were opened for other 
+people to use. All the code in this package has been developed by Alexey Kovyrin for Scribd.com and is 
+released under the MIT license. For more details, see LICENSE file.
