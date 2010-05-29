@@ -45,14 +45,14 @@ describe Htcp::Client do
     context "when called without additional headers" do
       it "should compose a CLR request and try to send it out" do
         @htcp.should_receive(:send_messages)
-        @htcp.clr('/foo/bar?baz=blah')
+        @htcp.clr('http://www.blah.com/foo/bar?baz=blah')
       end
     end
     
     context "when called with additional headers" do
       it "should compose a CLR request and try to send it out" do
         @htcp.should_receive(:send_messages)
-        @htcp.clr('/foo/bar?baz=blah', 'Foo: bar')
+        @htcp.clr('http://www.blah.com/foo/bar?baz=blah', 'Foo: bar')
       end
     end
   end
@@ -61,13 +61,13 @@ describe Htcp::Client do
     it "should send the message out to one server when only one server specified" do
       htcp = Htcp::Client.new('127.0.0.1')
       htcp.should_receive(:send_message).once
-      htcp.clr('/foo/bar?baz=blah')
+      htcp.clr('http://www.blah.com/foo/bar?baz=blah')
     end
 
     it "should send the message out to all servers when many servers specified" do
       htcp = Htcp::Client.new('127.0.0.1', '127.0.0.2')
       htcp.should_receive(:send_message).twice
-      htcp.clr('/foo/bar?baz=blah')
+      htcp.clr('http://www.blah.com/foo/bar?baz=blah')
     end
   end
 end
