@@ -6,6 +6,7 @@ begin
     gemspec.description = 'This simple library implements HTCP protocol (www.htcp.org/) and could be used in any Ruby project to manage any HTCP-compliant caching server (authors use it for Squid 2.7 servers management).'
     gemspec.email       = 'alexey@kovyrin.net'
     gemspec.homepage    = 'http://github.com/kovyrin/htcp-ruby'
+    gemspec.rubyforge_project = 'htcp'
     gemspec.authors     = ['Alexey Kovyrin']
     gemspec.files.include ['lib/**/*']
   end
